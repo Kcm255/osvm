@@ -1,7 +1,7 @@
 {
   "meta": {
     "analyzer_version": "1.1.0",
-    "generated_at_utc": "2026-10-13T05:06:47Z",
+    "generated_at_utc": "2026-10-15T04:29:56Z",
     "collected_on": "krish"
   },
   "os": {
@@ -15,7 +15,7 @@
     "product_name": "Windows 11 Pro",
     "display_version": "25H2",
     "build": "26200",
-    "uptime_seconds": 5174
+    "uptime_seconds": 864
   },
   "cpu": {
     "model": "Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz",
@@ -26,9 +26,9 @@
   },
   "memory": {
     "total_gb": 7.6,
-    "available_gb": 1.17,
-    "used_gb": 6.43,
-    "used_percent": 84.6,
+    "available_gb": 0.92,
+    "used_gb": 6.69,
+    "used_percent": 88.0,
     "swap_total_gb": null,
     "swap_free_gb": null
   },
@@ -38,9 +38,9 @@
       "mount": "C:\\",
       "type": "fixed",
       "total_gb": 237.59,
-      "used_gb": 211.09,
-      "free_gb": 26.51,
-      "used_percent": 88.8
+      "used_gb": 217.5,
+      "free_gb": 20.09,
+      "used_percent": 91.5
     }
   ],
   "virtualization": {
@@ -55,15 +55,15 @@
   },
   "network": {
     "hostname": "krish",
-    "fqdn": "krish.guest",
+    "fqdn": "krish",
     "ip": "10.210.14.82",
     "addresses": [
+      "fe80::6679:d8d9:8b49:64e",
       "fe80::ca73:35b9:321:d1a2",
-      "fe80::10b:b55:3601:5ce8",
-      "10.210.14.82",
-      "172.30.208.1"
+      "172.19.192.1",
+      "10.210.14.82"
     ],
-    "mac": "b4:a9:fc:87:07:c3"
+    "mac": null
   },
   "applications": {
     "installed": {
@@ -152,7 +152,7 @@
         },
         {
           "name": "Google Chrome",
-          "version": "154.0.8037.98"
+          "version": "155.0.8059.40"
         },
         {
           "name": "icecap_collection_neutral",
@@ -174,8 +174,8 @@
     },
     "tools_detected": {
       "python3": "C:\\Users\\lenovo\\AppData\\Local\\Microsoft\\WindowsApps\\python3.EXE",
-      "python": "C:\\Users\\lenovo\\OneDrive\\Desktop\\osvm\\venv\\Scripts\\python.EXE",
-      "pip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\osvm\\venv\\Scripts\\pip.EXE",
+      "python": "C:\\Users\\lenovo\\OneDrive\\Desktop\\osvm\\venv\\scripts\\python.EXE",
+      "pip": "C:\\Users\\lenovo\\OneDrive\\Desktop\\osvm\\venv\\scripts\\pip.EXE",
       "java": "C:\\Program Files\\Microsoft\\jdk-17.0.19.10-hotspot\\bin\\java.EXE",
       "node": "C:\\Program Files\\nodejs\\node.EXE",
       "npm": "C:\\Users\\lenovo\\AppData\\Roaming\\npm\\npm.CMD",
@@ -189,269 +189,65 @@
       "ssh": "C:\\WINDOWS\\System32\\OpenSSH\\ssh.EXE"
     },
     "processes": {
-      "total": 290,
+      "total": 300,
       "top_by_memory": [
         {
-          "pid": 13196,
-          "name": "chrome.exe",
-          "memory_mb": 390.6
+          "pid": 16516,
+          "name": "Code.exe",
+          "memory_mb": 345.9
         },
         {
-          "pid": 4964,
+          "pid": 17344,
+          "name": "Code.exe",
+          "memory_mb": 302.7
+        },
+        {
+          "pid": 5292,
           "name": "MsMpEng.exe",
-          "memory_mb": 299.4
+          "memory_mb": 288.4
         },
         {
-          "pid": 3732,
-          "name": "Code.exe",
-          "memory_mb": 298.9
-        },
-        {
-          "pid": 17464,
-          "name": "Code.exe",
-          "memory_mb": 281.4
-        },
-        {
-          "pid": 19072,
-          "name": "Code.exe",
-          "memory_mb": 260.9
-        },
-        {
-          "pid": 4516,
-          "name": "msedge.exe",
-          "memory_mb": 250.8
-        },
-        {
-          "pid": 3340,
-          "name": "Memory Compression",
-          "memory_mb": 218.6
-        },
-        {
-          "pid": 9700,
-          "name": "explorer.exe",
-          "memory_mb": 191.2
-        },
-        {
-          "pid": 16436,
-          "name": "copilot-runtime.exe",
-          "memory_mb": 178.7
-        },
-        {
-          "pid": 15880,
+          "pid": 14624,
           "name": "chrome.exe",
-          "memory_mb": 150.5
+          "memory_mb": 284.6
+        },
+        {
+          "pid": 19620,
+          "name": "Code.exe",
+          "memory_mb": 257.1
+        },
+        {
+          "pid": 11984,
+          "name": "chrome.exe",
+          "memory_mb": 159.1
+        },
+        {
+          "pid": 4036,
+          "name": "explorer.exe",
+          "memory_mb": 152.8
+        },
+        {
+          "pid": 19692,
+          "name": "PhoneExperienceHost.exe",
+          "memory_mb": 143.1
+        },
+        {
+          "pid": 5204,
+          "name": "msedge.exe",
+          "memory_mb": 137.4
+        },
+        {
+          "pid": 11604,
+          "name": "Code.exe",
+          "memory_mb": 118.1
         }
       ]
     }
   },
   "deployed_applications": {
     "listening_ports": {
-      "count": 29,
-      "ports": [
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 135,
-          "pid": 1580,
-          "process": "svchost.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "172.30.208.1",
-          "port": 139,
-          "pid": 4,
-          "process": "System"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 445,
-          "pid": 4,
-          "process": "System"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 808,
-          "pid": 4684,
-          "process": "OneApp.IGCC.WinService.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 1521,
-          "pid": 4700,
-          "process": "TNSLSNR.EXE"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 2179,
-          "pid": 2940,
-          "process": "vmms.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "0.0.0.0",
-          "port": 5040,
-          "pid": 9680,
-          "process": "svchost.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 5432,
-          "pid": 6156,
-          "process": "postgres.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "0.0.0.0",
-          "port": 7070,
-          "pid": 4672,
-          "process": "AnyDesk.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 8080,
-          "pid": 4700,
-          "process": "TNSLSNR.EXE"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 9001,
-          "pid": 4,
-          "process": "System"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 20985,
-          "pid": 19072,
-          "process": "Code.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::1",
-          "port": 42050,
-          "pid": 12880,
-          "process": "OneDrive.Sync.Service.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 49664,
-          "pid": 1276,
-          "process": "lsass.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 49665,
-          "pid": 1072,
-          "process": "wininit.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 49666,
-          "pid": 2124,
-          "process": "svchost.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::1",
-          "port": 49667,
-          "pid": 3612,
-          "process": "jhi_service.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 49674,
-          "pid": 2528,
-          "process": "svchost.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 49675,
-          "pid": 4316,
-          "process": "spoolsv.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 49676,
-          "pid": 5320,
-          "process": "SocketHeciServer.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 49683,
-          "pid": 4700,
-          "process": "TNSLSNR.EXE"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 49685,
-          "pid": 4928,
-          "process": "cer_service.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 49687,
-          "pid": 4856,
-          "process": "oracle.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "::",
-          "port": 49688,
-          "pid": 1228,
-          "process": "services.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 50484,
-          "pid": 15596,
-          "process": "AdskIdentityManager.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 50485,
-          "pid": 15596,
-          "process": "AdskIdentityManager.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 57399,
-          "pid": 19072,
-          "process": "Code.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 57408,
-          "pid": 684,
-          "process": "Code.exe"
-        },
-        {
-          "protocol": "tcp",
-          "address": "127.0.0.1",
-          "port": 57445,
-          "pid": 17464,
-          "process": "Code.exe"
-        }
-      ]
+      "count": 0,
+      "ports": []
     },
     "containers": {
       "runtime": "docker",

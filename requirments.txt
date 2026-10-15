@@ -1,0 +1,5 @@
+# system_analyzer.py needs NO third-party packages for local mode.
+# paramiko is only required on the machine you run the script from
+# when connecting to a remote server over SSH (--host ...).
+# Nothing needs to be installed on the remote server except Python 3.6+.
+paramiko>=3.0

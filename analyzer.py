@@ -1646,22 +1646,30 @@ def auto_scan_application_dependencies(check_latest=False):
 # Gather everything
 # --------------------------------------------------------------------------
 
-def gather_all(max_apps=25, app_path=None, check_latest=False):
-    return {
-        "meta": {"analyzer_version": VERSION,
-                 "generated_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                 "collected_on": platform.node()},
-        "os": safe(get_os_info),
-        "cpu": safe(get_cpu_info),
-        "memory": safe(get_memory_info),
-        "disk": safe(get_disk_info),
-        "virtualization": safe(detect_virtualization),
-        "network": safe(get_network_info),
-        "applications": safe(get_applications, max_apps),
-        "deployed_applications": safe(get_deployed_applications),
-        "application_dependencies": (safe(scan_application_dependencies, app_path, check_latest) if app_path
-                                     else safe(auto_scan_application_dependencies, check_latest)),
-    }
+def gather_all(max_apps=25, app_path=None, check_latest=False, progress=None):
+    sections = {}
+    stages = [
+        ("meta", lambda: {"analyzer_version": VERSION,
+                          "generated_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                          "collected_on": platform.node()}),
+        ("os", get_os_info),
+        ("cpu", get_cpu_info),
+        ("memory", get_memory_info),
+        ("disk", get_disk_info),
+        ("virtualization", detect_virtualization),
+        ("network", get_network_info),
+        ("applications", lambda: get_applications(max_apps)),
+        ("deployed_applications", get_deployed_applications),
+        ("application_dependencies",
+         lambda: (scan_application_dependencies(app_path, check_latest) if app_path
+                  else auto_scan_application_dependencies(check_latest))),
+    ]
+    total = len(stages)
+    for completed, (name, collect) in enumerate(stages, 1):
+        sections[name] = collect() if name == "meta" else safe(collect)
+        if progress:
+            progress(completed * 100 // total)
+    return sections
 
 
 # --------------------------------------------------------------------------
@@ -1715,7 +1723,7 @@ def _remote_upload(client, source, flags, timeout):
     return None
 
 
-def run_remote(args):
+def run_remote(args, progress=None):
     try:
         import paramiko
     except ImportError:
@@ -1744,9 +1752,13 @@ def run_remote(args):
         client.connect(**kw)
     except Exception as e:
         sys.exit("SSH connection to %s:%s failed: %s" % (args.host, args.port, e))
+    if progress:
+        progress(20)
 
     with open(os.path.abspath(__file__), "rb") as f:
         source = f.read()
+    if progress:
+        progress(25)
     flags = "--json --max-apps %d" % args.max_apps
     if args.app_path:
         flags += " --app-path %s" % args.app_path
@@ -1755,15 +1767,23 @@ def run_remote(args):
     errors = []
     try:
         if args.upload:
+            if progress:
+                progress(30)
             data = _remote_upload(client, source, flags, args.run_timeout)
             if data:
+                if progress:
+                    progress(100)
                 return data
         # Default: pipe this script into the remote interpreter's stdin.
         # No temp file, nothing to clean up, works on Linux/macOS/Windows SSH servers.
+        if progress:
+            progress(30)
         for py in ("python3", "python", "py -3"):
             rc, out, err = _exec(client, "%s - %s" % (py, flags), args.run_timeout, source)
             data = _parse_json(out)
             if data:
+                if progress:
+                    progress(100)
                 return data
             errors.append("%s -> exit %s %s" % (py, rc, (err or out).strip()[:200]))
     finally:
@@ -2147,24 +2167,29 @@ def _run_with_loading(message, operation, *args):
         return operation(*args)
 
     stop = threading.Event()
+    current_progress = [0]
 
     def animate():
         frames = "|/-\\"
         index = 0
         while not stop.is_set():
-            sys.stderr.write("\r%s %s" % (message, frames[index % len(frames)]))
+            sys.stderr.write("\r%s %3d%% %s" %
+                             (message, current_progress[0], frames[index % len(frames)]))
             sys.stderr.flush()
             index += 1
             stop.wait(0.1)
 
+    def update_progress(percent):
+        current_progress[0] = max(0, min(100, percent))
+
     spinner = threading.Thread(target=animate, daemon=True)
     spinner.start()
     try:
-        return operation(*args)
+        return operation(*args, progress=update_progress)
     finally:
         stop.set()
         spinner.join()
-        sys.stderr.write("\r%s\r" % (" " * (len(message) + 2)))
+        sys.stderr.write("\r%s %3d%%\n" % (message, current_progress[0]))
         sys.stderr.flush()
 
 
